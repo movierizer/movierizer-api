@@ -1,10 +1,10 @@
-package com.movierizer.api.movierizerAPI;
+package fr.movierizer.movierizerapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovierizerApiApplicationTests {
+class MovierizerapiApplicationTests {
 
 	@Test
 	void contextLoads() {
