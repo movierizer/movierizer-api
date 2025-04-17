@@ -1,7 +1,0 @@
-fr/movierizer/movierizerapi/exception/MovieNotFoundException.class
-fr/movierizer/movierizerapi/controller/MovieController.class
-fr/movierizer/movierizerapi/exception/MovieNotFoundAdvice.class
-fr/movierizer/movierizerapi/MovierizerapiApplication.class
-fr/movierizer/movierizerapi/config/LoadDatabase.class
-fr/movierizer/movierizerapi/model/Movie.class
-fr/movierizer/movierizerapi/repository/MovieRepository.class
