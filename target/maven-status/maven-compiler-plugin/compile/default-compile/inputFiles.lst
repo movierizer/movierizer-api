@@ -1,0 +1,7 @@
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/MovierizerapiApplication.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/config/LoadDatabase.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/controller/MovieController.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/exception/MovieNotFoundAdvice.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/exception/MovieNotFoundException.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/model/Movie.java
+/home/sonren/Documents/stage L3/movierizer/movierizer-api/src/main/java/fr/movierizer/movierizerapi/repository/MovieRepository.java
