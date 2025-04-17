@@ -1,4 +1,4 @@
-package fr.movierizer.movierizerapi.ressources;
+package fr.movierizer.movierizerapi.model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
