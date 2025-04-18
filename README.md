@@ -1,13 +1,17 @@
-# movierizer-API
-
-
+# movierizer-API Documentation 
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+For be ready to launch my application, you have just to clone the project into your files, make sure that your java version is in 21
+and you have already installed Maven in the 3.8.7 version. Once this is done type the command : `./mvnw clean spring-boot:ru` to launch
+the tomcat server. You can find this page in the URL : http://localhost:8080/movies .
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
+
+
+
+
+`
 ## Add your files
 
 - [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
