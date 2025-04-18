@@ -7,11 +7,12 @@ import jakarta.persistence.Id;
 import javax.annotation.processing.Generated;
 import java.util.Objects;
 
+
 @Entity
 public class Movie {
 
 	private @Id
-	@GeneratedValue Long isan; 
+	@GeneratedValue Long id; 
 	private String title;
 	private String description;
 	private Integer grade;
@@ -24,12 +25,12 @@ public class Movie {
 		this.grade = grade;
 	}
 
-    public Long getIsan() {
-		return isan;
+    public Long getid() {
+		return id;
 	}
 
-	public void setIsan(Long isan) {
-		this.isan = isan;
+	public void setid(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -65,17 +66,17 @@ public class Movie {
 		if (!(obj instanceof Movie))
 			return false;
 		Movie other = (Movie) obj;
-		return Objects.equals(this.isan, other.isan);
+		return Objects.equals(this.id, other.id);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.isan, this.title, this.description, this.grade);
+		return Objects.hash(this.id, this.title, this.description, this.grade);
 	}
 
 	@Override
 	public String toString() {
-		return "Movie [isan=" + this.isan + ", title=" + this.title + ", description=" + this.description + ", grade="
+		return "Movie [id=" + this.id + ", title=" + this.title + ", description=" + this.description + ", grade="
 				+ this.grade + "]";
 	}
 }
