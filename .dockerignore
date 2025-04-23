@@ -1,0 +1,15 @@
+target/
+*.log
+*.class
+*.jar
+*.war
+
+.vscode/
+
+.git
+.gitignore
+
+.DS_Store
+
+.env
+README.md
