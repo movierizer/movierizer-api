@@ -1,9 +1,12 @@
-target/
+target
 *.log
 *.class
 *.jar
 *.war
-
+*.iml
+*.swp     
+*.bak      
+*.tmp
 .vscode/
 
 .git
@@ -13,3 +16,4 @@ target/
 
 .env
 README.md
+HELP.md
