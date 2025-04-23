@@ -12,13 +12,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoadDatabase {
 
+    //logger use to print message in the console
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
+    //Bean mean the fonction will be execute when starting the app
     @Bean
     CommandLineRunner initDatabase(MovieRepository repository) {
         return args -> {
-            log.info("Preloading" + repository.save(new Movie("Leon", "A man with glasses who killed people", 100)));
-            log.info("Preloading" + repository.save(new Movie("seven", "What's in the box", 70)));
+            if (repository.count() == 0) {
+                Movie movie1 = new Movie("Léon", "A man with glasses who killed people", 100);
+                repository.save(movie1);
+                log.info("Preloading: " + movie1);
+            }
         };
     }
     
