@@ -2,14 +2,14 @@
 
 # Prerequisites
 
-Before try to start the applicatiuon you have to check two things : 
+Before try to start the application you have to check two things : 
 
  - Java is in version 21 
- - Maven is at leasr version 3.8.7
+ - Maven is at least version 3.8.7
 
 # Launch the application 
 
-My application is very simple to use, type :
+This application is very simple to use, type :
 
 ```
 ./mvnw clean spring-boot:run
