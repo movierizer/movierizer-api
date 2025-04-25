@@ -4,7 +4,7 @@ package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans
 import java.util.List;
 import fr.movierizer.movierizerapi.repository.MovieRepository;
 import fr.movierizer.movierizerapi.model.Movie;
-import fr.movierizer.movierizerapi.exception.*;
+import fr.movierizer.movierizerapi.services.MovieServices;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,43 +19,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private final MovieRepository movierepository;
+    private final MovieServices movieservices;
 
-    public MovieController(MovieRepository repository) {
-        this.movierepository = repository;
+    public MovieController(MovieServices movieservice) {
+        this.movieservices = movieservice;
     }
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        return movierepository.findAll();
+        return movieservices.getAllMovies();
     }
 
     @PostMapping
     public Movie newMovie(@RequestBody Movie newMovie) {
-        return movierepository.save(newMovie);
+        return movieservices.newMovie(newMovie);
     }
     
     @GetMapping("/{isan}")
     public Movie getOneMovie(@PathVariable Long isan) {
-        return movierepository.findById(isan)
-                .orElseThrow(() -> new MovieNotFoundException(isan));
+        return movieservices.getOneMovie(isan);
     }
 
     @PutMapping("/{isan}")
     public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long isan) {
-        
-        return movierepository.findById(isan)
-                .map(movie -> {
-                    movie.setTitle(newMovie.getTitle());
-                    movie.setDescription(newMovie.getDescription());
-                    movie.setGrade(newMovie.getGrade());
-                    return movierepository.save(movie);
-                })
-                .orElseThrow(() -> new MovieNotFoundException(isan));
+        return movieservices.updateMovie(newMovie, isan);
     }
 
     @DeleteMapping("/{isan}")
     public void deleteMovie(@PathVariable Long isan){
-        movierepository.deleteById(isan);
+        movieservices.deleteMovie(isan);
     }
 }
