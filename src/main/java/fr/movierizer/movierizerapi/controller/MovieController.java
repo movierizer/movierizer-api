@@ -2,7 +2,6 @@ package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans
 
 
 import java.util.List;
-import fr.movierizer.movierizerapi.repository.MovieRepository;
 import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.services.MovieServices;
 
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+/*This controller class is important for the application, here we can redirect the request to the services associated : here MovieServices
+ * and we can see all the movies mapping of my api*/
 
 @RestController
 @RequestMapping("/movies")

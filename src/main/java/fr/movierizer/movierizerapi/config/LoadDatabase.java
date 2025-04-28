@@ -1,4 +1,4 @@
-package fr.movierizer.movierizerapi.config; /*problèmes de package */
+package fr.movierizer.movierizerapi.config; 
 
 import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.repository.MovieRepository;
@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*This is a class to load the database with some movies when starting the app */
 @Configuration
 public class LoadDatabase {
 

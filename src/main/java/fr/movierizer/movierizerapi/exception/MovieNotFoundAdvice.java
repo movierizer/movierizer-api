@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/* Sert a intercepter les exceptions présentes dans les fichier @RestController */
+/*Used to catch exceptions present in @RestController files and a behavior are defined in this class for each exception*/
 @RestControllerAdvice
 public class MovieNotFoundAdvice {
     
-    @ExceptionHandler(MovieNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND) /* Va renvoyer une erreur 404 */
+    @ExceptionHandler(MovieNotFoundException.class) /*this method will be called when a MovieNotFoundException is thrown*/
+    @ResponseStatus(HttpStatus.NOT_FOUND) /*return a 404 error*/
     public String movieNotFoundHandler(MovieNotFoundException ex){
         return ex.getMessage();
     }

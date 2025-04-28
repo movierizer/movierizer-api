@@ -1,14 +1,12 @@
 package fr.movierizer.movierizerapi.model;
 
-import java.lang.annotation.Inherited;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import javax.annotation.processing.Generated;
 import java.util.Objects;
 import jakarta.persistence.Table;
 
-
+/*This class is my movies entity who represent a movie in my database*/
 @Entity
 @Table(name = "movies")
 public class Movie {
@@ -19,6 +17,7 @@ public class Movie {
 	private String description;
 	private Integer grade;
 
+	/*Default constructor*/
 	public Movie() {}
 
 	public Movie(String title, String description, Integer grade) {

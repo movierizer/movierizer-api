@@ -2,18 +2,20 @@ package fr.movierizer.movierizerapi.config;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import org.springframework.context.annotation.Configuration;
 
+/*This class is used to configure CORS to allowed the services who can talk with my API*/
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
+        registry.addMapping("/**") //For all the mapping
             .allowedOrigins(System.getenv("BACK_ALLOWED_ORIGINS_LOCALHOST"),System.getenv("BACK_ALLOWED_ORIGINS_FRONT")) //the URL of the react application
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
-            .allowCredentials(true);
+            .allowCredentials(true); //allowed the reponse to send cookies with identificals data
     }
     
 }

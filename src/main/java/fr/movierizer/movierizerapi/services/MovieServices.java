@@ -7,7 +7,7 @@ import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.exception.*; 
 import org.springframework.stereotype.Service;
 
-
+/*This class is call by controller and he represent all of the logic of my application. What to do in wich situation*/
 @Service 
 public class MovieServices {
 
