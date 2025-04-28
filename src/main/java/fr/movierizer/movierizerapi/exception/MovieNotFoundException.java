@@ -2,7 +2,7 @@ package fr.movierizer.movierizerapi.exception;
 
 public class MovieNotFoundException extends RuntimeException {
     
-    public MovieNotFoundException(Long isan) {
-        super("Could not find movie " + isan);
+    public MovieNotFoundException(Long id) {
+        super("Could not find movie " + id);
     }
 }

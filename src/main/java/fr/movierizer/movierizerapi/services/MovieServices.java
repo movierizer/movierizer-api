@@ -21,28 +21,28 @@ public class MovieServices {
         return movierepository.findAll();
     }
 
-    public Movie getOneMovie(Long isan) {
-        return movierepository.findById(isan)
-                .orElseThrow(() -> new MovieNotFoundException(isan));
+    public Movie getOneMovie(Long id) {
+        return movierepository.findById(id)
+                .orElseThrow(() -> new MovieNotFoundException(id));
     }
 
     public Movie newMovie(Movie newMovie) {
         return movierepository.save(newMovie);
     }
 
-    public Movie updateMovie(Movie newMovie, Long isan) {
-        return movierepository.findById(isan)
+    public Movie updateMovie(Movie newMovie, Long id) {
+        return movierepository.findById(id)
                 .map(movie -> {
                     movie.setTitle(newMovie.getTitle());
                     movie.setDescription(newMovie.getDescription());
                     movie.setGrade(newMovie.getGrade());
                     return movierepository.save(movie);
                 })
-                .orElseThrow(() -> new MovieNotFoundException(isan));
+                .orElseThrow(() -> new MovieNotFoundException(id));
     }
 
-    public void deleteMovie(Long isan){
-        movierepository.deleteById(isan);
+    public void deleteMovie(Long id){
+        movierepository.deleteById(id);
     }
     
 }

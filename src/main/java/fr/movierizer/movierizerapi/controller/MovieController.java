@@ -36,17 +36,17 @@ public class MovieController {
     }
     
     @GetMapping("/{isan}")
-    public Movie getOneMovie(@PathVariable Long isan) {
-        return movieservices.getOneMovie(isan);
+    public Movie getOneMovie(@PathVariable Long id) {
+        return movieservices.getOneMovie(id);
     }
 
     @PutMapping("/{isan}")
-    public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long isan) {
-        return movieservices.updateMovie(newMovie, isan);
+    public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
+        return movieservices.updateMovie(newMovie, id);
     }
 
     @DeleteMapping("/{isan}")
-    public void deleteMovie(@PathVariable Long isan){
-        movieservices.deleteMovie(isan);
+    public void deleteMovie(@PathVariable Long id){
+        movieservices.deleteMovie(id);
     }
 }
