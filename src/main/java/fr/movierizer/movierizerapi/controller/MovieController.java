@@ -29,26 +29,31 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getAllMovies() {
+        System.out.println("GET ALL MOVIES MAPPING");
         return movieservices.getAllMovies();
     }
 
     @PostMapping
     public Movie newMovie(@RequestBody Movie newMovie) {
+        System.out.println("NEW MOVIE MAPPING");
         return movieservices.newMovie(newMovie);
     }
     
     @GetMapping("/{isan}")
     public Movie getOneMovie(@PathVariable Long id) {
+        System.out.println("GET ONE MOVIE MAPPING");
         return movieservices.getOneMovie(id);
     }
 
     @PutMapping("/{isan}")
     public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
+        System.out.println("UPDATE MOVIE MAPPING");
         return movieservices.updateMovie(newMovie, id);
     }
 
     @DeleteMapping("/{isan}")
     public void deleteMovie(@PathVariable Long id){
+        System.out.println("DELETE MOVIE MAPPING");
         movieservices.deleteMovie(id);
     }
 }
