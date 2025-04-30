@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /*This controller class is important for the application, here we can redirect the request to the services associated : here MovieServices
  * and we can see all the movies mapping of my api*/
@@ -28,9 +29,14 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> getAllMovies() {
-        System.out.println("GET ALL MOVIES MAPPING");
-        return movieservices.getAllMovies();
+    public Object getMovies(@RequestParam(value = "query", required = false) String query) {
+        if(query != null && !query.isBlank()){
+            System.out.println("SEARCH MOVIE MAPPING");
+            return movieservices.search(query);
+        }else{
+            System.out.println("GET ALL MOVIES MAPPING");
+            return movieservices.getAllMovies();
+        }
     }
 
     @PostMapping

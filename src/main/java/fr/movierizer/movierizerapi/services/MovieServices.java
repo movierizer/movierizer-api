@@ -3,7 +3,6 @@ package fr.movierizer.movierizerapi.services;
 import java.util.List;
 
 import fr.movierizer.movierizerapi.repository.MovieRepository;
-import reactor.core.publisher.Mono;
 import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.exception.*; 
 import org.springframework.stereotype.Service;
@@ -32,6 +31,11 @@ public class MovieServices {
         log.info("GET ONE MOVIE");
         return movierepository.findById(id)
                 .orElseThrow(() -> new MovieNotFoundException(id));
+    }
+
+    public String search(String query) {
+        log.info("SEARCH MOVIE");
+        return apiService.searchMovie(query).block();
     }
 
     public Movie newMovie(Movie newMovie) {

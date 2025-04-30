@@ -37,4 +37,17 @@ public class ApiService {
         System.out.println("REPONSE DE L'API : " + result);
         return result;
 	}
+
+    public Mono<String> searchMovie(String query) {
+        System.out.println("APPEL DE L'API POUR CHERHCER: " + query);
+        Mono<String> result = this.webClient.get()
+        .uri(uriBuilder -> uriBuilder
+            .path("/search/movie")
+            .queryParam("query",query)
+            .build())
+        .retrieve()
+        .bodyToMono(String.class);
+        System.out.println("REPONSE DE L'API : " + result);
+        return result;
+    }
 }
