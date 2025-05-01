@@ -1,7 +1,6 @@
 package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans le package */
 
 
-import java.util.List;
 import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.services.MovieServices;
 
@@ -45,19 +44,19 @@ public class MovieController {
         return movieservices.newMovie(newMovie);
     }
     
-    @GetMapping("/{isan}")
+    @GetMapping("/{id}")
     public Movie getOneMovie(@PathVariable Long id) {
         System.out.println("GET ONE MOVIE MAPPING");
         return movieservices.getOneMovie(id);
     }
 
-    @PutMapping("/{isan}")
+    @PutMapping("/{id}")
     public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
         System.out.println("UPDATE MOVIE MAPPING");
         return movieservices.updateMovie(newMovie, id);
     }
 
-    @DeleteMapping("/{isan}")
+    @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable Long id){
         System.out.println("DELETE MOVIE MAPPING");
         movieservices.deleteMovie(id);
