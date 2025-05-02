@@ -14,7 +14,7 @@ public class Movie {
 	private @Id Long id;
 	@Column(name = "title") 
 	private String title;
-	@Column(name = "overview")
+	@Column(name = "overview", columnDefinition = "TEXT")
 	private String overview;
 	@Column(name = "grade")
 	private Integer grade;
