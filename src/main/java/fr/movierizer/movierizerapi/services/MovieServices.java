@@ -29,8 +29,17 @@ public class MovieServices {
 
     public Movie getOneMovie(Long id) {
         log.info("GET ONE MOVIE");
-        return movierepository.findById(id)
-                .orElseThrow(() -> new MovieNotFoundException(id));
+        if(movierepository.findById(id).isEmpty()) {
+            System.out.println("MOVIE NOT IN DATABASE");
+            Movie movie = apiService.getOneMovie(id).block();
+            if (movie == null) {
+                throw new MovieNotFoundException(id);
+            }
+            return movierepository.save(movie);
+        }else {
+            System.out.println("MOVIE IN DATABASE");
+            return movierepository.findById(id).get();
+        }
     }
 
     public String search(String query) {
@@ -51,7 +60,7 @@ public class MovieServices {
         return movierepository.findById(id)
                 .map(movie -> {
                     movie.setTitle(newMovie.getTitle());
-                    movie.setDescription(newMovie.getDescription());
+                    movie.setOverview(newMovie.getOverview());
                     movie.setGrade(newMovie.getGrade());
                     return movierepository.save(movie);
                 })

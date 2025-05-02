@@ -1,7 +1,7 @@
 package fr.movierizer.movierizerapi.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,43 +10,31 @@ import jakarta.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
-
-	private @Id
-	@GeneratedValue Long id; 
+	@Column(name = "id")
+	private @Id Long id;
+	@Column(name = "title") 
 	private String title;
-	private String description;
+	@Column(name = "overview")
+	private String overview;
+	@Column(name = "grade")
 	private Integer grade;
-	private String originalTitle;
-	private String releaseDate;
-	private String posterPath;
-	private String backdropPath;
+	@Column(name = "original_title")
+	private String original_title;
+	@Column(name = "release_date")
+	private String release_date;
+	@Column(name = "poster_path")
+	private String poster_path;
+	@Column(name = "backdrop_path")
+	private String backdrop_path;
+	@Column(name = "budget")
 	private int budget;
+	@Column(name = "revenue")
 	private int revenue;
+	@Column(name = "runtime")
 	private int runtime;
 
 	/*Default constructor*/
 	public Movie() {}
-
-	public Movie(String title, String description, Integer grade){
-		this.title = title;
-		this.description = description;
-		this.grade = grade;
-	}
-
-	public Movie(Long id, String title, String description, Integer grade, String originalTitle, String releaseDate,
-	String posterPath, String backdropPath, int budget, int revenue, int runtime) {
-	this.id = id;
-	this.title = title;
-	this.description = description;
-	this.grade = grade;
-	this.originalTitle = originalTitle;
-	this.releaseDate = releaseDate;
-	this.posterPath = posterPath;
-	this.backdropPath = backdropPath;
-	this.budget = budget;
-	this.revenue = revenue;
-	this.runtime = runtime;
-	}
 	
     public Long getid() {
 		return id;
@@ -64,12 +52,12 @@ public class Movie {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getOverview() {
+		return overview;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setOverview(String overview) {
+		this.overview = overview;
 	}
 
 	public Integer getGrade() {
@@ -80,36 +68,36 @@ public class Movie {
 		this.grade = grade;
 	}
 
-	public String getOriginalTitle() {
-		return originalTitle;
+	public String getOriginal_title() {
+		return original_title;
 	}
 
-	public void setOriginalTitle(String originalTitle) {
-		this.originalTitle = originalTitle;
+	public void setOriginal_title(String original_title) {
+		this.original_title = original_title;
 	}
 
-	public String getReleaseDate() {
-		return releaseDate;
+	public String getRelease_date() {
+		return release_date;
 	}
 
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
 	}
 
-	public String getPosterPath() {
-		return posterPath;
+	public String getPoster_path() {
+		return poster_path;
 	}
 
-	public void setPosterPath(String posterPath) {
-		this.posterPath = posterPath;
+	public void setPoster_path(String poster_path) {
+		this.poster_path = poster_path;
 	}
 
-	public String getBackdropPath() {
-		return backdropPath;
+	public String getBackdrop_path() {
+		return backdrop_path;
 	}
 
-	public void setBackdropPath(String backdropPath) {
-		this.backdropPath = backdropPath;
+	public void setBackdrop_path(String backdrop_path) {
+		this.backdrop_path = backdrop_path;
 	}
 
 	public int getBudget() {
@@ -155,35 +143,35 @@ public class Movie {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (description == null) {
-			if (other.description != null)
+		if (overview == null) {
+			if (other.overview != null)
 				return false;
-		} else if (!description.equals(other.description))
+		} else if (!overview.equals(other.overview))
 			return false;
 		if (grade == null) {
 			if (other.grade != null)
 				return false;
 		} else if (!grade.equals(other.grade))
 			return false;
-		if (originalTitle == null) {
-			if (other.originalTitle != null)
+		if (original_title == null) {
+			if (other.original_title != null)
 				return false;
-		} else if (!originalTitle.equals(other.originalTitle))
+		} else if (!original_title.equals(other.original_title))
 			return false;
-		if (releaseDate == null) {
-			if (other.releaseDate != null)
+		if (release_date == null) {
+			if (other.release_date != null)
 				return false;
-		} else if (!releaseDate.equals(other.releaseDate))
+		} else if (!release_date.equals(other.release_date))
 			return false;
-		if (posterPath == null) {
-			if (other.posterPath != null)
+		if (poster_path == null) {
+			if (other.poster_path != null)
 				return false;
-		} else if (!posterPath.equals(other.posterPath))
+		} else if (!poster_path.equals(other.poster_path))
 			return false;
-		if (backdropPath == null) {
-			if (other.backdropPath != null)
+		if (backdrop_path == null) {
+			if (other.backdrop_path != null)
 				return false;
-		} else if (!backdropPath.equals(other.backdropPath))
+		} else if (!backdrop_path.equals(other.backdrop_path))
 			return false;
 		if (budget != other.budget)
 			return false;
@@ -200,12 +188,12 @@ public class Movie {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((overview == null) ? 0 : overview.hashCode());
 		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
-		result = prime * result + ((originalTitle == null) ? 0 : originalTitle.hashCode());
-		result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
-		result = prime * result + ((posterPath == null) ? 0 : posterPath.hashCode());
-		result = prime * result + ((backdropPath == null) ? 0 : backdropPath.hashCode());
+		result = prime * result + ((original_title == null) ? 0 : original_title.hashCode());
+		result = prime * result + ((release_date == null) ? 0 : release_date.hashCode());
+		result = prime * result + ((poster_path == null) ? 0 : poster_path.hashCode());
+		result = prime * result + ((backdrop_path == null) ? 0 : backdrop_path.hashCode());
 		result = prime * result + budget;
 		result = prime * result + revenue;
 		result = prime * result + runtime;
@@ -214,9 +202,9 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", title=" + title + ", description=" + description + ", grade=" + grade
-				+ ", originalTitle=" + originalTitle + ", releaseDate=" + releaseDate + ", posterPath=" + posterPath
-				+ ", backdropPath=" + backdropPath + ", budget=" + budget + ", revenue=" + revenue + ", runtime="
+		return "Movie [id=" + id + ", title=" + title + ", description=" + overview + ", grade=" + grade
+				+ ", originalTitle=" + original_title + ", releaseDate=" + release_date + ", posterPath=" + poster_path
+				+ ", backdropPath=" + backdrop_path + ", budget=" + budget + ", revenue=" + revenue + ", runtime="
 				+ runtime + "]";
 	}
 }

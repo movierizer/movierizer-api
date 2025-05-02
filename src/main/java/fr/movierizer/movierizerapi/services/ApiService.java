@@ -38,6 +38,18 @@ public class ApiService {
         return result;
 	}
 
+    public Mono<Movie> getOneMovie(Long id) {
+        System.out.println("APPEL DE L'API POUR LE FILM AVEC ID: " + id);
+        Mono<Movie> result = this.webClient.get()
+            .uri(uriBuilder -> uriBuilder
+                .path("/movie/" + id)
+                .build())
+            .retrieve()
+            .bodyToMono(Movie.class);
+        System.out.println("REPONSE DE L'API : " + result);
+        return result;
+    }
+
     public Mono<String> searchMovie(String query) {
         System.out.println("APPEL DE L'API POUR CHERHCER: " + query);
         Mono<String> result = this.webClient.get()
