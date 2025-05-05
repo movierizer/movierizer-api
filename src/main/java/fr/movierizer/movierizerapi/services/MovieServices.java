@@ -29,17 +29,11 @@ public class MovieServices {
 
     public Movie getOneMovie(Long id) {
         log.info("GET ONE MOVIE");
-        if(movierepository.findById(id).isEmpty()) {
-            System.out.println("MOVIE NOT IN DATABASE");
             Movie movie = apiService.getOneMovie(id).block();
             if (movie == null) {
                 throw new MovieNotFoundException(id);
             }
-            return movierepository.save(movie);
-        }else {
-            System.out.println("MOVIE IN DATABASE");
-            return movierepository.findById(id).get();
-        }
+            return movie;
     }
 
     public String search(String query) {
