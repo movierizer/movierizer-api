@@ -10,28 +10,28 @@ import jakarta.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
-	@Column(name = "id")
-	private @Id Long id;
+	@Column(name = "id") 
+	private @Id Long id; //this id is the primary key and we use the TMDB id 
 	@Column(name = "title") 
-	private String title;
+	private String title; //title of the movie in the user language
 	@Column(name = "overview", columnDefinition = "TEXT")
-	private String overview;
+	private String overview; //the synopsis of the movie
 	@Column(name = "grade")
-	private Integer grade;
+	private Integer grade; //the grade of the movie from 0 to 100 by the user of the movierizer app
 	@Column(name = "original_title")
-	private String original_title;
+	private String original_title; //title of the movie in the original language
 	@Column(name = "release_date")
-	private String release_date;
+	private String release_date; 
 	@Column(name = "poster_path")
-	private String poster_path;
+	private String poster_path; //the url of the poster of the movie in the TMDB API
 	@Column(name = "backdrop_path")
-	private String backdrop_path;
+	private String backdrop_path; //the url of the backdrop of the movie in the TMDB API
 	@Column(name = "budget")
-	private int budget;
+	private int budget; //the budget to make the movie
 	@Column(name = "revenue")
-	private int revenue;
+	private int revenue; //all the money made by the movie
 	@Column(name = "runtime")
-	private int runtime;
+	private int runtime; //the duration of the movie in minutes
 
 	/*Default constructor*/
 	public Movie() {}

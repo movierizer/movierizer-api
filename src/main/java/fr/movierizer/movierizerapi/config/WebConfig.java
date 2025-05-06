@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    /**
+     * CORS configuration to allow the React application to make requests to the API.
+     * @param registry The CORS registry to add mappings to.
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") //For all the mapping
