@@ -27,6 +27,7 @@ public class ApiService {
      * Searches for a movie by its title, is language is set to English, include adult content and 
      * we limit the number of results to one page. This we call the TMDB API with this parameters.
      * The response is logged before being returned.
+     * 
      * @param newMovie the movie object containing the title to search for.
      * @return a Mono emitting the API response as a String.
      */

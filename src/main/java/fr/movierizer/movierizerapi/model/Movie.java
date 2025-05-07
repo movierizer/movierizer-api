@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
+	//TODO vu d'ensemnble a medifier a terme 
 	@Column(name = "id") 
 	private @Id Long id; //this id is the primary key and we use the TMDB id 
 	@Column(name = "title") 

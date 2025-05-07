@@ -13,6 +13,7 @@ public class MovieNotFoundAdvice {
     /**
      * Called when a MovieNotFoundException is thrown.
      * Returns a 404 error.
+     * 
      * @param ex the exception thrown.
      * @return the error message.
      */

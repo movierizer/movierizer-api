@@ -9,6 +9,7 @@ public class MovierizerapiApplication {
 
 	/**
 	 * This is the main class of the application, it is used to start the Spring Boot application.
+	 * 
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {

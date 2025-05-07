@@ -24,6 +24,7 @@ public class MovieServices {
 
     /**
      * This method will return a list of all movies available in the repository, so inderectly in the database.
+     * 
      * @return a list of all movies available in the repository.
      */
     public List<Movie> getAllMovies() {

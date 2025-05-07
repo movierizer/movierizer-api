@@ -11,6 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     /**
      * CORS configuration to allow the React application to make requests to the API.
+     * 
      * @param registry The CORS registry to add mappings to.
      */
     @Override
