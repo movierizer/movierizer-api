@@ -1,5 +1,7 @@
 package fr.movierizer.movierizerapi.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class ApiService {
 
+    private static final Logger log = LoggerFactory.getLogger(ApiService.class);
     private final WebClient webClient;
     private final String BEARER_TOKEN_TDMB = "Bearer " + System.getenv("BEARER_TOKEN_TDMB");
 
@@ -33,7 +36,7 @@ public class ApiService {
      */
     //TODO LOOK TO SEE IF IT'S USEFUL
 	public Mono<String> getOneMovie(Movie newMovie) {
-        System.out.println("APPEL DE L'API POUR LE FILM: " + newMovie.getTitle());
+        log.info("APPEL DE L'API POUR LE FILM: " + newMovie.getTitle());
         Mono<String> result = this.webClient.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/search/movie")
@@ -44,7 +47,7 @@ public class ApiService {
                 .build())
             .retrieve()
             .bodyToMono(String.class);
-        System.out.println("REPONSE DE L'API : " + result);
+        log.info("REPONSE DE L'API : " + result);
         return result;
 	}
 
@@ -57,14 +60,14 @@ public class ApiService {
      * @return a Mono emitting the Movie object retrieved from the API.
      */
     public Mono<Movie> getOneMovie(Long id) {
-        System.out.println("APPEL DE L'API POUR LE FILM AVEC ID: " + id);
+        log.info("APPEL DE L'API POUR LE FILM AVEC ID: " + id);
         Mono<Movie> result = this.webClient.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/movie/" + id)
                 .build())
             .retrieve()
             .bodyToMono(Movie.class);
-        System.out.println("REPONSE DE L'API : " + result);
+        log.info("REPONSE DE L'API : " + result);
         return result;
     }
 
@@ -78,15 +81,15 @@ public class ApiService {
      * @return a Mono emitting the API response as a String.
      */
     public Mono<String> searchMovie(String query) {
-        System.out.println("APPEL DE L'API POUR CHERHCER: " + query);
+        log.info("APPEL DE L'API POUR CHERHCER: " + query);
         Mono<String> result = this.webClient.get()
-        .uri(uriBuilder -> uriBuilder
-            .path("/search/movie")
-            .queryParam("query",query)
-            .build())
-        .retrieve()
-        .bodyToMono(String.class);
-        System.out.println("REPONSE DE L'API : " + result);
+            .uri(uriBuilder -> uriBuilder
+                .path("/search/movie")
+                .queryParam("query",query)
+                .build())
+            .retrieve()
+            .bodyToMono(String.class);
+        log.info("REPONSE DE L'API : " + result);
         return result;
     }
 }

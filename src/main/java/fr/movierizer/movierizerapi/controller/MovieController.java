@@ -4,6 +4,8 @@ package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans
 import fr.movierizer.movierizerapi.model.Movie;
 import fr.movierizer.movierizerapi.services.MovieServices;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/movies")
 public class MovieController {
 
+    private static final Logger log = LoggerFactory.getLogger(MovieController.class);
     private final MovieServices movieservices;
 
     public MovieController(MovieServices movieservice) {
@@ -36,10 +39,10 @@ public class MovieController {
     @GetMapping
     public Object getMovies(@RequestParam(value = "query", required = false) String query) {
         if(query != null && !query.isBlank()){
-            System.out.println("SEARCH MOVIE MAPPING");
+            log.info("SEARCH MOVIE MAPPING");
             return movieservices.search(query);
         }else{
-            System.out.println("GET ALL MOVIES MAPPING");
+            log.info("GET ALL MOVIES MAPPING");
             return movieservices.getAllMovies();
         }
     }
@@ -52,7 +55,7 @@ public class MovieController {
      */
     @PostMapping
     public Movie newMovie(@RequestBody Movie newMovie) {
-        System.out.println("NEW MOVIE MAPPING");
+        log.info("NEW MOVIE MAPPING");
         return movieservices.newMovie(newMovie);
     }
     
@@ -65,7 +68,7 @@ public class MovieController {
      */
     @GetMapping("/{id}")
     public Movie getOneMovie(@PathVariable Long id) {
-        System.out.println("GET ONE MOVIE MAPPING");
+        log.info("GET ONE MOVIE MAPPING");
         return movieservices.getOneMovie(id);
     }
 
@@ -79,7 +82,7 @@ public class MovieController {
      */
     @PutMapping("/{id}")
     public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
-        System.out.println("UPDATE MOVIE MAPPING");
+        log.info("UPDATE MOVIE MAPPING");
         return movieservices.updateMovie(newMovie, id);
     }
 
@@ -92,7 +95,7 @@ public class MovieController {
 
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable Long id){
-        System.out.println("DELETE MOVIE MAPPING");
+        log.info("DELETE MOVIE MAPPING");
         movieservices.deleteMovie(id);
     }
 }
