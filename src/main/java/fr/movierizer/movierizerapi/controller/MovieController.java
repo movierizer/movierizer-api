@@ -29,9 +29,9 @@ public class MovieController {
     /**
      * Mapping to get all movies in the database or to search a movie with a query
      * The method will return a list of movies if the query parameter is not set.
-     * If the query parameter is set, the method will return a string containing the result of the search. We can intrepet that like a list of results. 
+     If the query parameter is set, the method will return a string containing the result of the search. We can intrepet that like a list of results.
+ 
      * @param query the query string to search movies.
-     * @return a list of movies or a string containing the result of the search.
      */
     @GetMapping
     public Object getMovies(@RequestParam(value = "query", required = false) String query) {
