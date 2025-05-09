@@ -19,10 +19,11 @@ variables:
 #{build stage to compile the back}
 build:
   stage: build
-  script: "mvn clean package -DskipTests"
+  script: 
+    - mvn clean package -DskipTests
   artifacts:
     paths:
-      - target/movierizerapi-0.0.1-SNAPSHOT.jar
+      - target/movierizerapi-0.0.2.jar
 
 #TODO add the test stage to run the tests
 
@@ -32,11 +33,14 @@ package:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   stage: package
+  dependencies:
+    - build 
   before_script:
     - mkdir -p /kaniko/.docker
     - cp $DOCKER_AUTH_CONFIG /kaniko/.docker/config.json
+    - cp target/movierizerapi-0.0.2.jar docker/
   script: 
-    - /kaniko/executor 
-        --context "${CI_PROJECT_DIR}"
-        --dockerfile Dockerfile 
+      - /kaniko/executor 
+        --context "${CI_PROJECT_DIR}/docker"
+        --dockerfile "${CI_PROJECT_DIR}/docker/Dockerfile"
         --destination "s0nren/movierizer-api:${API_VERSION}"
