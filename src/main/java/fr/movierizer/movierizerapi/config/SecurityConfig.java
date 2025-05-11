@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import fr.movierizer.movierizerapi.services.UserServiceImpl;
@@ -51,18 +49,6 @@ public class SecurityConfig {
                     .roles(user.getRole())
                     .build();
         };
-    }
-
-    /**
-     * A PasswordEncoder that uses the BCrypt password hashing algorithm.
-     * It is used to encode passwords when registering a new user and
-     * to verify passwords when logging in.
-     *
-     * @return a PasswordEncoder object
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     /**
