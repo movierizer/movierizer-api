@@ -33,7 +33,6 @@ public class ApplicationConfiguration {
      */
     @Bean
     UserDetailsService userDetailsService() {
-        log.info("COUCOUC DE USERDETAILSERVICE");
         return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

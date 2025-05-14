@@ -31,14 +31,14 @@ public class User implements UserDetails{
     private String email; // email is unique and this is the email of the user 
     @Column(name = "password", nullable = false)
     private String password; // the password is encrypted and choose by the user
-    @Column(name = "userlanguage")
+    @Column(name = "userlanguage", columnDefinition = "VARCHAR(100) DEFAULT 'en'")
     private String user_language; //the user language is english by default but the user can change this
     @Column(name = "profilepicture", columnDefinition = "TEXT")
     private String profile_picture; //the profile picture is a url of an image but it's not mandatory
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private String create_at; //this is a date when the user is created is profile it's automatically created by the database when the profile is created
-    @Column(name = "role")
+    @Column(name = "role", columnDefinition = "VARCHAR(100) DEFAULT 'USER'")
     private String role; //the role is user by default but the user and admin can change this role, the crerator is an admin
     @UpdateTimestamp
     @Column(name = "updated_at")
@@ -59,7 +59,7 @@ public class User implements UserDetails{
         this.role = role;
     }
 
-
+    
     @Override
     public boolean isAccountNonExpired() {
         return true;

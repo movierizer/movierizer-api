@@ -12,4 +12,5 @@ import fr.movierizer.movierizerapi.data.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByUsername(String username);
+    void delete (User user);
 }
