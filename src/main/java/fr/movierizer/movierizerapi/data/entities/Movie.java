@@ -1,7 +1,9 @@
-package fr.movierizer.movierizerapi.model;
+package fr.movierizer.movierizerapi.data.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +13,8 @@ import jakarta.persistence.Table;
 public class Movie {
 
 	//TODO vu d'ensemnble a medifier a terme 
-	@Column(name = "id") 
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private @Id Long id; //this id is the primary key and we use the TMDB id 
 	@Column(name = "title") 
 	private String title; //title of the movie in the user language
@@ -36,6 +39,11 @@ public class Movie {
 
 	/*Default constructor*/
 	public Movie() {}
+
+	public Movie(String title, Integer grade) {
+		this.title = title;
+		this.grade = grade;
+	}
 	
     public Long getid() {
 		return id;

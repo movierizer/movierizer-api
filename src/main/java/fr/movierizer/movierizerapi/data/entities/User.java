@@ -1,4 +1,13 @@
-package fr.movierizer.movierizerapi.model;
+package fr.movierizer.movierizerapi.data.entities;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,26 +18,30 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id; // Primary key and an id autoincrement but TODO implement a UID
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username; // the username is unique and he is choose by the user
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email; // email is unique and this is the email of the user 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password; // the password is encrypted and choose by the user
     @Column(name = "userlanguage")
     private String user_language; //the user language is english by default but the user can change this
     @Column(name = "profilepicture", columnDefinition = "TEXT")
     private String profile_picture; //the profile picture is a url of an image but it's not mandatory
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
     private String create_at; //this is a date when the user is created is profile it's automatically created by the database when the profile is created
     @Column(name = "role")
     private String role; //the role is user by default but the user and admin can change this role, the crerator is an admin
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt; //this is a date when the user is updated is profile it's automatically updated by the database when the profile is updated
     
     public User() {
     }
@@ -45,6 +58,27 @@ public class User {
         this.role = role;
     }
 
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -54,20 +88,23 @@ public class User {
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
     public String getUser_language() {
         return user_language;
@@ -93,6 +130,14 @@ public class User {
     }
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -167,6 +212,11 @@ public class User {
         return "Users [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
                 + ", userLanguage=" + user_language + ", profilePicture=" + profile_picture + ", create_at=" + create_at
                 + ", role=" + role + "]";
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
 
 }

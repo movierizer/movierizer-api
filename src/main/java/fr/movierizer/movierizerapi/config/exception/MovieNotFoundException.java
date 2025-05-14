@@ -1,4 +1,4 @@
-package fr.movierizer.movierizerapi.exception;
+package fr.movierizer.movierizerapi.config.exception;
 
 /*This is a class for the exception MovieNotFoundException*/
 public class MovieNotFoundException extends RuntimeException {

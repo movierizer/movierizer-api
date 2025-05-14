@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import fr.movierizer.movierizerapi.model.Movie;
+import fr.movierizer.movierizerapi.data.entities.Movie;
 import reactor.core.publisher.Mono;
 
 @Service

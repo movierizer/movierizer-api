@@ -2,9 +2,10 @@ package fr.movierizer.movierizerapi.services;
 
 import java.util.List;
 
-import fr.movierizer.movierizerapi.repository.MovieRepository;
-import fr.movierizer.movierizerapi.model.Movie;
-import fr.movierizer.movierizerapi.exception.*; 
+import fr.movierizer.movierizerapi.config.exception.*;
+import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.repository.MovieRepository;
+
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

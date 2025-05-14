@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    String origin1 = System.getenv("BACK_ALLOWED_ORIGINS_LOCALHOST");
+    String origin2 = System.getenv("BACK_ALLOWED_ORIGINS_FRONT");
+
     /**
      * CORS configuration to allow the React application to make requests to the API.
      * 
@@ -17,10 +20,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") //For all the mapping
-            .allowedOrigins(System.getenv("BACK_ALLOWED_ORIGINS_LOCALHOST"),System.getenv("BACK_ALLOWED_ORIGINS_FRONT")) //the URL of the react application
+            .allowedOrigins(origin1, origin2) //the URL of the react application
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(true); //allowed the reponse to send cookies with identificals data
+            .allowedHeaders("Content-Type", "Authorization")
+            .allowCredentials(true); //allowed the reponse to send cookies with identificals data   
     }
     
 }

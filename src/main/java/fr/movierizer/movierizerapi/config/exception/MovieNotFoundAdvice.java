@@ -1,4 +1,4 @@
-package fr.movierizer.movierizerapi.exception;
+package fr.movierizer.movierizerapi.config.exception;
 
 
 import org.springframework.http.HttpStatus;

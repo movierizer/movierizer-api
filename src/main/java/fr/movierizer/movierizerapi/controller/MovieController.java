@@ -1,7 +1,7 @@
 package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans le package */
 
 
-import fr.movierizer.movierizerapi.model.Movie;
+import fr.movierizer.movierizerapi.data.entities.Movie;
 import fr.movierizer.movierizerapi.services.MovieServices;
 
 import org.slf4j.Logger;

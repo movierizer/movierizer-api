@@ -1,0 +1,16 @@
+FROM eclipse-temurin:21 AS build 
+
+COPY . .
+
+RUN chmod +x mvnw
+RUN ./mvnw clean package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine AS run
+
+ARG API_VERSION=0.0.2
+WORKDIR /app
+COPY --from=build /target/movierizerapi-${API_VERSION}.jar app.jar
+
+EXPOSE 5000
+
+CMD ["java", "-jar", "app.jar"]
