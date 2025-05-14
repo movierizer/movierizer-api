@@ -3,6 +3,7 @@ package fr.movierizer.movierizerapi.data.entities;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,9 +22,9 @@ import jakarta.persistence.Table;
 public class User implements UserDetails{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private Long id; // Primary key and an id autoincrement but TODO implement a UID
+    private UUID id; // Primary key and an id autoincrement but TODO implement a UID
     @Column(name = "username", nullable = false, unique = true)
     private String username; // the username is unique and he is choose by the user
     @Column(name = "email", nullable = false, unique = true)
@@ -46,7 +47,7 @@ public class User implements UserDetails{
     public User() {
     }
 
-    public User(Long id, String username, String email, String password, String userLanguage, String profilePicture,
+    public User(UUID id, String username, String email, String password, String userLanguage, String profilePicture,
     String create_at, String role) {
         this.id = id;
         this.username = username;
@@ -79,10 +80,10 @@ public class User implements UserDetails{
         return true;
     }
     
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getUsername() {
