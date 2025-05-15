@@ -47,11 +47,11 @@ public class AuthenticationService {
     }
 
     /**
-     * Authenticates a user based on the provided email and password.
+     * Authenticates a user based on the provided username and password.
      * 
      * @param input the data transfer object containing user login information.
-     * @return the user entity associated with the provided email address, if the authentication is successful.
-     * @throws UsernameNotFoundException if the user with the provided email address does not exist.
+     * @return the user entity associated with the provided username, if the authentication is successful.
+     * @throws UsernameNotFoundException if the user with the provided username does not exist.
      */
     public UserDetails authenticate(LoginUserDto input) {
         authenticationManager.authenticate(

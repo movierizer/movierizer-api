@@ -102,8 +102,6 @@ public class JwtService {
      * @return the generated JWT token as a string
      */
     private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
-        log.info("CONSTRUCTION TOKEN");
-        log.info("GETUSERNAME = " + userDetails.getUsername());
         return Jwts
                 .builder()
                 .claims(extraClaims)

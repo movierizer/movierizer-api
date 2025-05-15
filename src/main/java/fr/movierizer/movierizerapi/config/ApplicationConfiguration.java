@@ -27,9 +27,9 @@ public class ApplicationConfiguration {
 
     /**
      * Return a UserDetailsService implementation that uses the userRepository to
-     * load a user by its email address.
+     * load a user by its username.
      * 
-     * @return a UserDetailsService that loads a user by its email address.
+     * @return a UserDetailsService that loads a user by its username.
      */
     @Bean
     UserDetailsService userDetailsService() {
