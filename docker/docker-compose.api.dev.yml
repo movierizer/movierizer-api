@@ -1,0 +1,24 @@
+services:  
+  back:
+    build: 
+      context: '.'
+      dockerfile: 'Dockerfile.dev'
+    image: movierizer_api
+    container_name: movierizer_api_dev
+    restart: always
+    env_file:
+      - .env
+      - .private.env
+    ports:
+      - "8081:5000"
+    networks:
+      - backend
+      - frontend
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  frontend:
+    name: frontend
+    driver: bridge

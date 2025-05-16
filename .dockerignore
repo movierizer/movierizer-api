@@ -11,6 +11,7 @@ target
 
 .git
 .gitignore
+docker/.private.env
 
 .DS_Store
 
