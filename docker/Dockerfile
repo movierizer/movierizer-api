@@ -2,7 +2,8 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY movierizerapi-0.0.2.jar app.jar
+ARG API_VERSION=0.1.2
+COPY movierizerapi-${API_VERSION}.jar app.jar
 
 EXPOSE 5000
 

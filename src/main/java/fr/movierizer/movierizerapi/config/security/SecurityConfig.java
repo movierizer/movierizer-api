@@ -1,16 +1,19 @@
 package fr.movierizer.movierizerapi.config.security;
 
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 /* This is a class to configure the security of the application */
@@ -20,6 +23,11 @@ public class SecurityConfig {
     
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    String origin_localhost = System.getenv("BACK_ALLOWED_ORIGINS_LOCALHOST");
+    String origin_front = System.getenv("BACK_ALLOWED_ORIGINS_FRONT");
+    String origin_deployement = System.getenv("BACK_ALLOWED_ORIGINS_DEPLOYEMENT");
+    String origin_dev_deployement = System.getenv("BACK_ALLOWED_ORIGINS_DEV_DEPLOYEMENT");
 
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationProvider authenticationProvider){
         this.authenticationProvider = authenticationProvider;
@@ -44,16 +52,27 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.csrf(AbstractHttpConfigurer::disable)
           .authorizeHttpRequests(auth -> 
-                    auth.requestMatchers(HttpMethod.OPTIONS, "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                    auth.requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated())
-          .cors(Customizer.withDefaults()) 
-          .csrf(AbstractHttpConfigurer::disable)  // TODO see if enable this security is really necessary (CRSF protection is garanted by JWT tokens)
           .httpBasic(Customizer.withDefaults())
           .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
           .authenticationProvider(authenticationProvider)
+          .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+          .csrf(csrf -> csrf.disable())
           .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+    @Bean
+    UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(origin_localhost, origin_front, origin_deployement, origin_dev_deployement));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;  
     }
 
 }

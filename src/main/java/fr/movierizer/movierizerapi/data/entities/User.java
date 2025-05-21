@@ -31,19 +31,21 @@ public class User implements UserDetails{
     private String email; // email is unique and this is the email of the user 
     @Column(name = "password", nullable = false)
     private String password; // the password is encrypted and choose by the user
-    @Column(name = "userlanguage", columnDefinition = "VARCHAR(100) DEFAULT 'en'")
+    @Column(name = "userlanguage")
     private String user_language; //the user language is english by default but the user can change this
     @Column(name = "profilepicture", columnDefinition = "TEXT")
     private String profile_picture; //the profile picture is a url of an image but it's not mandatory
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private String create_at; //this is a date when the user is created is profile it's automatically created by the database when the profile is created
-    @Column(name = "role", columnDefinition = "VARCHAR(100) DEFAULT 'USER'")
+    @Column(name = "role")
     private String role; //the role is user by default but the user and admin can change this role, the crerator is an admin
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Date updatedAt; //this is a date when the user is updated is profile it's automatically updated by the database when the profile is updated
-    
+    private Date updated_at; //this is a date when the user is updated is profile it's automatically updated by the database when the profile is updated
+    @Column(name = "tokenTMDB")
+    private String tokenTMDB;
+
     public User() {
     }
 
@@ -110,8 +112,9 @@ public class User implements UserDetails{
     public String getUser_language() {
         return user_language;
     }
-    public void setUser_language(String userLanguage) {
+    public User setUser_language(String userLanguage) {
         this.user_language = userLanguage;
+        return this;
     }
     public String getProfile_picture() {
         return profile_picture;
@@ -129,16 +132,25 @@ public class User implements UserDetails{
     public String getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public User setRole(String role) {
         this.role = role;
+        return this;
     }
 
     public Date getUpdatedAt() {
-        return updatedAt;
+        return updated_at;
     }
 
     public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updated_at = updatedAt;
+    }
+
+    public String getTokenTMDB() {
+        return tokenTMDB;
+    }
+
+    public void setTokenTMDB(String tokenTMDB) {
+        this.tokenTMDB = tokenTMDB;
     }
 
     @Override

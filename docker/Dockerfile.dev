@@ -7,7 +7,7 @@ RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine AS run
 
-ARG API_VERSION=0.0.2
+ARG API_VERSION=0.1.2
 WORKDIR /app
 COPY --from=build /target/movierizerapi-${API_VERSION}.jar app.jar
 

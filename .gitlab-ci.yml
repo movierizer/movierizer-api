@@ -23,7 +23,7 @@ build:
     - mvn clean package -DskipTests
   artifacts:
     paths:
-      - target/movierizerapi-0.0.2.jar
+      - target/movierizerapi-${API_VERSION}.jar
 
 #TODO add the test stage to run the tests
 
@@ -38,7 +38,7 @@ package:
   before_script:
     - mkdir -p /kaniko/.docker
     - cp $DOCKER_AUTH_CONFIG /kaniko/.docker/config.json
-    - cp target/movierizerapi-0.0.2.jar docker/
+    - cp target/movierizerapi-${API_VERSION}.jar docker/
   script: 
       - /kaniko/executor 
         --context "${CI_PROJECT_DIR}/docker"

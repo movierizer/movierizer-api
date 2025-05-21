@@ -7,6 +7,7 @@ import fr.movierizer.movierizerapi.data.entities.Movie;
 import fr.movierizer.movierizerapi.data.repository.MovieRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

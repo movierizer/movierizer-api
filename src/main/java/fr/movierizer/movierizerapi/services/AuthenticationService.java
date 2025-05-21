@@ -41,7 +41,9 @@ public class AuthenticationService {
         User user = new User()
                 .setUsername(input.username())
                 .setEmail(input.email())
-                .setPassword(passwordEncoder.encode(input.password()));
+                .setPassword(passwordEncoder.encode(input.password()))
+                .setRole("USER")
+                .setUser_language("FR");
 
         return userRepository.save(user);
     }

@@ -1,9 +1,9 @@
 services:  
   back:
     build: 
-      context: '.'
-      dockerfile: 'Dockerfile.dev'
-    image: movierizer_api
+      context: '../'
+      dockerfile: 'docker/Dockerfile.dev'
+    image: movierizer_api_dev
     container_name: movierizer_api_dev
     restart: always
     env_file:

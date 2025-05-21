@@ -1,4 +1,4 @@
-package fr.movierizer.movierizerapi.controller; /* Pourquoi il y  un soucis dans le package */
+package fr.movierizer.movierizerapi.controller; 
 
 
 import fr.movierizer.movierizerapi.data.entities.Movie;
