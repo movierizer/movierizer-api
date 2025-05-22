@@ -13,6 +13,6 @@ import fr.movierizer.movierizerapi.data.entities.User_movies;
 @Repository
 public interface User_movieRepository extends JpaRepository<User_movies, Long> {
         User_movies findByUserIdAndMovieId(UUID user_id, Long movie_id);
-        List<User_movies> findByUserIdAndWatchlist(UUID user_id, boolean watchlist);
+        List<User_movies> findByUserIdAndWatchlist(UUID user_id, Boolean watchlist);
         List<User_movies> findByUserIdAndWatchlistNotNull(UUID user_id);
 }

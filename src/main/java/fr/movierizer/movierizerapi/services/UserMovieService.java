@@ -54,8 +54,10 @@ public class UserMovieService {
     public DtoMovieUser getOneMovieWithoutUser (Movie movie) {
         log.info("GET THE MOVIE WITHOUT USER INFO");
         Movie movieReturned = movieServices.getOneMovie(movie.getid());
-        movierepository.save(movie);
         return new DtoMovieUser(
+                null,
+                null,
+                null,
                 movieReturned.getid(),
                 movieReturned.getTitle(),
                 movieReturned.getOverview(),

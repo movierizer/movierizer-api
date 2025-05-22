@@ -5,7 +5,7 @@ import java.util.UUID;
 public class DtoMovieUser {
     
     private UUID iduser;
-    private boolean watchlist;
+    private Boolean watchlist;
     private Integer grade;
 	private Long idmovie; 
 	private String title; 
@@ -20,7 +20,7 @@ public class DtoMovieUser {
 
     public DtoMovieUser() {}
 
-    public DtoMovieUser(UUID iduser, boolean watchlist, Integer grade, Long idmovie, String title, String overview,
+    public DtoMovieUser(UUID iduser, Boolean watchlist, Integer grade, Long idmovie, String title, String overview,
             String original_title, String release_date, String poster_path, String backdrop_path, int budget,
             int revenue, int runtime) {
         this.iduser = iduser;
@@ -61,11 +61,11 @@ public class DtoMovieUser {
         this.iduser = iduser;
     }
 
-    public boolean isWatchlist() {
+    public Boolean isWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(boolean watchlist) {
+    public void setWatchlist(Boolean watchlist) {
         this.watchlist = watchlist;
     }
 
