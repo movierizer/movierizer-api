@@ -2,8 +2,6 @@ package fr.movierizer.movierizerapi.data.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -14,14 +12,11 @@ public class Movie {
 
 	//TODO vu d'ensemnble a medifier a terme 
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private @Id Long id; //this id is the primary key and we use the TMDB id 
 	@Column(name = "title") 
 	private String title; //title of the movie in the user language
 	@Column(name = "overview", columnDefinition = "TEXT")
-	private String overview; //the synopsis of the movie
-	@Column(name = "grade")
-	private Integer grade; //the grade of the movie from 0 to 100 by the user of the movierizer app
+	private String overview;//the synopsis of the movie
 	@Column(name = "original_title")
 	private String original_title; //title of the movie in the original language
 	@Column(name = "release_date")
@@ -36,13 +31,17 @@ public class Movie {
 	private int revenue; //all the money made by the movie
 	@Column(name = "runtime")
 	private int runtime; //the duration of the movie in minutes
+	@Column(name = "country")
+	private String country;
+	@Column(name = "url_trailer")
+	private String url_trailer;
+
 
 	/*Default constructor*/
 	public Movie() {}
 
 	public Movie(String title, Integer grade) {
 		this.title = title;
-		this.grade = grade;
 	}
 	
     public Long getid() {
@@ -67,14 +66,6 @@ public class Movie {
 
 	public void setOverview(String overview) {
 		this.overview = overview;
-	}
-
-	public Integer getGrade() {
-		return grade;
-	}
-
-	public void setGrade(Integer grade) {
-		this.grade = grade;
 	}
 
 	public String getOriginal_title() {
@@ -157,11 +148,6 @@ public class Movie {
 				return false;
 		} else if (!overview.equals(other.overview))
 			return false;
-		if (grade == null) {
-			if (other.grade != null)
-				return false;
-		} else if (!grade.equals(other.grade))
-			return false;
 		if (original_title == null) {
 			if (other.original_title != null)
 				return false;
@@ -198,7 +184,6 @@ public class Movie {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((overview == null) ? 0 : overview.hashCode());
-		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
 		result = prime * result + ((original_title == null) ? 0 : original_title.hashCode());
 		result = prime * result + ((release_date == null) ? 0 : release_date.hashCode());
 		result = prime * result + ((poster_path == null) ? 0 : poster_path.hashCode());
@@ -211,9 +196,11 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", title=" + title + ", description=" + overview + ", grade=" + grade
+		return "Movie [id=" + id + ", title=" + title + ", description=" + overview 
 				+ ", originalTitle=" + original_title + ", releaseDate=" + release_date + ", posterPath=" + poster_path
 				+ ", backdropPath=" + backdrop_path + ", budget=" + budget + ", revenue=" + revenue + ", runtime="
 				+ runtime + "]";
 	}
+
+
 }

@@ -1,17 +1,27 @@
 package fr.movierizer.movierizerapi.controller; 
 
 
+import fr.movierizer.movierizerapi.data.DTO.DtoMovieUser;
 import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.entities.User;
+import fr.movierizer.movierizerapi.data.entities.User_movies;
+import fr.movierizer.movierizerapi.data.repository.User_movieRepository;
 import fr.movierizer.movierizerapi.services.MovieServices;
+import fr.movierizer.movierizerapi.services.UserMovieService;
+import fr.movierizer.movierizerapi.services.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +34,15 @@ public class MovieController {
 
     private static final Logger log = LoggerFactory.getLogger(MovieController.class);
     private final MovieServices movieservices;
+    private final UserService userService;
+    private final User_movieRepository user_movieRepository;
+    private final UserMovieService usermovieservices;
 
-    public MovieController(MovieServices movieservice) {
+    public MovieController(MovieServices movieservice, UserService userService, User_movieRepository user_movierepository, UserMovieService usermovieservices) {     
+        this.user_movieRepository = user_movierepository;
+        this.userService = userService;
         this.movieservices = movieservice;
+        this.usermovieservices = usermovieservices;
     }
 
     /**
@@ -67,9 +83,23 @@ public class MovieController {
      * @return the movie associated to the id.
      */
     @GetMapping("/{id}")
-    public Movie getOneMovie(@PathVariable Long id) {
+    public ResponseEntity<DtoMovieUser> getOneMovie(@RequestHeader String authorization, @PathVariable Long id) {
         log.info("GET ONE MOVIE MAPPING");
-        return movieservices.getOneMovie(id);
+        if (authorization != null && authorization.startsWith("Bearer ")) {
+            String token = authorization.substring(7);
+            User movieUser = userService.getOneUser(token);
+            User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
+            Movie movieToReturned = movieservices.getOneMovie(id); 
+            if( user_movie!= null){ //if true return the all data of the movie and the user
+                DtoMovieUser userMovie = usermovieservices.getOneMovieWithUser(movieToReturned, movieUser.getId());
+                return ResponseEntity.ok(userMovie);
+            }else{
+                DtoMovieUser userMovie = usermovieservices.getOneMovieWithoutUser(movieToReturned);
+                return ResponseEntity.ok(userMovie);
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new DtoMovieUser()); //TODO see to return maybe a string or something else 
+        }
     }
 
     /**
@@ -81,9 +111,21 @@ public class MovieController {
      * @return the updated movie with the id attribute set.
      */
     @PutMapping("/{id}")
-    public Movie updateMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
+    public ResponseEntity<User_movies> updateMovie(@RequestHeader String authorization, @RequestBody User_movies updateinfo, @PathVariable Long id) {
         log.info("UPDATE MOVIE MAPPING");
-        return movieservices.updateMovie(newMovie, id);
+         if (authorization != null && authorization.startsWith("Bearer ")) {
+            String token = authorization.substring(7);
+            User movieUser = userService.getOneUser(token);
+            User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
+            if(user_movie == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(updateinfo);
+            }else{
+                User_movies movieUpdated = usermovieservices.updateMovie(updateinfo, id, movieUser.getId());
+                return ResponseEntity.ok(movieUpdated);
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new User_movies()); //TODO see to return maybe a string or something else 
+        }
     }
 
     /**

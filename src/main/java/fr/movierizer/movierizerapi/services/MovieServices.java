@@ -7,7 +7,6 @@ import fr.movierizer.movierizerapi.data.entities.Movie;
 import fr.movierizer.movierizerapi.data.repository.MovieRepository;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,7 +91,6 @@ public class MovieServices {
                 .map(movie -> {
                     movie.setTitle(newMovie.getTitle());
                     movie.setOverview(newMovie.getOverview());
-                    movie.setGrade(newMovie.getGrade());
                     return movierepository.save(movie);
                 })
                 .orElseThrow(() -> new MovieNotFoundException(id));
