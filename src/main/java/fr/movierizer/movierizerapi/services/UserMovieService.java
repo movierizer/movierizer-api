@@ -1,5 +1,6 @@
 package fr.movierizer.movierizerapi.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -84,5 +85,25 @@ public class UserMovieService {
             return user_movieRepository.save(movieUpdated);
         }
 
+    }
+
+    public List<User_movies> getWatchlist(UUID id) {
+        log.info("GET WATCHLIST");
+        List<User_movies> watchlist = user_movieRepository.findByUserIdAndWatchlist(id, true);
+        if (watchlist.isEmpty()) {
+            throw new RuntimeException("Watchlist is empty");
+        }else{
+            return watchlist;
+        }
+    }
+
+    public List<User_movies> getCollection(UUID id) {
+        log.info("GET COLLECTION");
+        List<User_movies> watchlist = user_movieRepository.findByUserIdAndWatchlistNotNull(id);
+        if (watchlist.isEmpty()) {
+            throw new RuntimeException("Watchlist is empty");
+        }else{
+            return watchlist;
+        }
     }
 }
