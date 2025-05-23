@@ -22,7 +22,7 @@ public class User_movies {
     private Long movieId;
 
     @Column(name = "watchlist")
-    private Boolean watchlist;
+    private String watchlist;
 
     @Column(name = "grade")
     private Integer grade;
@@ -30,7 +30,7 @@ public class User_movies {
     public User_movies() {
     }
 
-    public User_movies(UUID userId, Long movieId, Boolean watchlist, Integer grade) {
+    public User_movies(UUID userId, Long movieId, String watchlist, Integer grade) {
         this.userId = userId;
         this.movieId = movieId;
         this.watchlist = watchlist;
@@ -53,11 +53,11 @@ public class User_movies {
         this.movieId = movieId;
     }
 
-    public Boolean isWatchlist() {
+    public String getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(Boolean watchlist) {
+    public void setWatchlist(String watchlist) {
         this.watchlist = watchlist;
     }
 

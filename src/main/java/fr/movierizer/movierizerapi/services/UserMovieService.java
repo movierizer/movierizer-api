@@ -35,7 +35,7 @@ public class UserMovieService {
         Movie movieReturned = movieServices.getOneMovie(movie.getid());
         return new DtoMovieUser(
                 user_movie.getId(),
-                user_movie.isWatchlist(),
+                user_movie.getWatchlist(),
                 user_movie.getGrade(),
                 movieReturned.getid(),
                 movieReturned.getTitle(),
@@ -79,10 +79,10 @@ public class UserMovieService {
             newUserMovie.setMovie_id(idMovie);
             newUserMovie.setGrade(updateinfo.getGrade());
             newUserMovie.setId(idUser);
-            newUserMovie.setWatchlist(updateinfo.isWatchlist());
+            newUserMovie.setWatchlist(updateinfo.getWatchlist());
             return user_movieRepository.save(newUserMovie);
         }else{
-            movieUpdated.setWatchlist(updateinfo.isWatchlist());
+            movieUpdated.setWatchlist(updateinfo.getWatchlist());
             movieUpdated.setGrade(updateinfo.getGrade());
             return user_movieRepository.save(movieUpdated);
         }
@@ -91,7 +91,7 @@ public class UserMovieService {
 
     public List<User_movies> getWatchlist(UUID id) {
         log.info("GET WATCHLIST");
-        List<User_movies> watchlist = user_movieRepository.findByUserIdAndWatchlist(id, true);
+        List<User_movies> watchlist = user_movieRepository.findByUserIdAndWatchlist(id, "watchlist");
         if (watchlist.isEmpty()) {
             throw new RuntimeException("Watchlist is empty");
         }else{
