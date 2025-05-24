@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import fr.movierizer.movierizerapi.data.DTO.DtoMovieUser;
 import fr.movierizer.movierizerapi.data.entities.Movie;
 import fr.movierizer.movierizerapi.data.entities.User_movies;
-import fr.movierizer.movierizerapi.data.repository.MovieRepository;
 import fr.movierizer.movierizerapi.data.repository.User_movieRepository;
 
 @Service 
@@ -18,13 +17,11 @@ public class UserMovieService {
     
     private static final Logger log = LoggerFactory.getLogger(UserMovieService.class);
     private final User_movieRepository user_movieRepository;
-    private final MovieRepository movierepository;
     private final MovieServices movieServices;
 
 
-    public UserMovieService(User_movieRepository user_movieRepository, MovieRepository movierepository, MovieServices movieServices) {
+    public UserMovieService(User_movieRepository user_movieRepository, MovieServices movieServices) {
         this.user_movieRepository = user_movieRepository;
-        this.movierepository = movierepository;
         this.movieServices = movieServices;
         
     }
@@ -107,5 +104,15 @@ public class UserMovieService {
         }else{
             return watchlist;
         }
+    }
+
+    public User_movies saveMovie(User_movies updateinfo, Long id, UUID idUser) {
+        log.info("SAVE MOVIE");
+        User_movies newUserMovie = new User_movies();
+        newUserMovie.setMovie_id(id);
+        newUserMovie.setGrade(updateinfo.getGrade());
+        newUserMovie.setId(idUser);
+        newUserMovie.setWatchlist(updateinfo.getWatchlist());
+        return user_movieRepository.save(newUserMovie);
     }
 }

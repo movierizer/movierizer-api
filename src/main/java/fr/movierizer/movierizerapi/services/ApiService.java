@@ -56,7 +56,6 @@ public class ApiService {
         if (token == null) {
             return Mono.error(new RuntimeException("Token user not available (user not connected)")); 
         }
-        log.info("TOKEN: " + token);
         Mono<String> result = this.webClient.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/search/movie")

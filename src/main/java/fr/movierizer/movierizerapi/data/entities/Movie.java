@@ -26,11 +26,11 @@ public class Movie {
 	@Column(name = "backdrop_path")
 	private String backdrop_path; //the url of the backdrop of the movie in the TMDB API
 	@Column(name = "budget")
-	private int budget; //the budget to make the movie
+	private Long budget; //the budget to make the movie
 	@Column(name = "revenue")
-	private int revenue; //all the money made by the movie
+	private Long revenue; //all the money made by the movie
 	@Column(name = "runtime")
-	private int runtime; //the duration of the movie in minutes
+	private Long runtime; //the duration of the movie in minutes
 	@Column(name = "country")
 	private String country;
 	@Column(name = "url_trailer")
@@ -100,27 +100,27 @@ public class Movie {
 		this.backdrop_path = backdrop_path;
 	}
 
-	public int getBudget() {
+	public Long getBudget() {
 		return budget;
 	}
 
-	public void setBudget(int budget) {
+	public void setBudget(Long budget) {
 		this.budget = budget;
 	}
 
-	public int getRevenue() {
+	public Long getRevenue() {
 		return revenue;
 	}
 
-	public void setRevenue(int revenue) {
+	public void setRevenue(Long revenue) {
 		this.revenue = revenue;
 	}
 
-	public int getRuntime() {
+	public Long getRuntime() {
 		return runtime;
 	}
 
-	public void setRuntime(int runtime) {
+	public void setRuntime(Long runtime) {
 		this.runtime = runtime;
 	}
 
@@ -188,9 +188,9 @@ public class Movie {
 		result = prime * result + ((release_date == null) ? 0 : release_date.hashCode());
 		result = prime * result + ((poster_path == null) ? 0 : poster_path.hashCode());
 		result = prime * result + ((backdrop_path == null) ? 0 : backdrop_path.hashCode());
-		result = prime * result + budget;
-		result = prime * result + revenue;
-		result = prime * result + runtime;
+		result = (int) (prime * result + budget);
+		result = (int) (prime * result + revenue);
+		result = (int) (prime * result + runtime);
 		return result;
 	}
 

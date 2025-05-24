@@ -14,15 +14,15 @@ public class DtoMovieUser {
 	private String release_date; 
 	private String poster_path; 
 	private String backdrop_path; 
-	private int budget; 
-	private int revenue; 
-	private int runtime;
+	private Long budget; 
+	private Long revenue; 
+	private Long runtime;
 
     public DtoMovieUser() {}
 
     public DtoMovieUser(UUID iduser, String watchlist, Integer grade, Long idmovie, String title, String overview,
-            String original_title, String release_date, String poster_path, String backdrop_path, int budget,
-            int revenue, int runtime) {
+            String original_title, String release_date, String poster_path, String backdrop_path, Long budget,
+            Long revenue, Long runtime) {
         this.iduser = iduser;
         this.watchlist = watchlist;
         this.grade = grade;
@@ -39,8 +39,8 @@ public class DtoMovieUser {
     }
 
     public DtoMovieUser(Long idmovie, String title, String overview,
-        String original_title, String release_date, String poster_path, String backdrop_path, int budget,
-        int revenue, int runtime) {
+        String original_title, String release_date, String poster_path, String backdrop_path, Long budget,
+        Long revenue, Long runtime) {
         this.idmovie = idmovie;
         this.title = title;
         this.overview = overview;
@@ -61,7 +61,7 @@ public class DtoMovieUser {
         this.iduser = iduser;
     }
 
-    public String isWatchlist() {
+    public String getWatchlist() {
         return watchlist;
     }
 
@@ -133,27 +133,27 @@ public class DtoMovieUser {
         this.backdrop_path = backdrop_path;
     }
 
-    public int getBudget() {
+    public Long getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(Long budget) {
         this.budget = budget;
     }
 
-    public int getRevenue() {
+    public Long getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(int revenue) {
+    public void setRevenue(Long revenue) {
         this.revenue = revenue;
     }
 
-    public int getRuntime() {
+    public Long getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(int runtime) {
+    public void setRuntime(Long runtime) {
         this.runtime = runtime;
     }
 

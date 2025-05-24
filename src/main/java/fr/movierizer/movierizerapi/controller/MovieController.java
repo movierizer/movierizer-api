@@ -118,7 +118,8 @@ public class MovieController {
             User movieUser = userService.getOneUser(token);
             User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
             if(user_movie == null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(updateinfo);
+                User_movies movieUpdated = usermovieservices.saveMovie(updateinfo, id, movieUser.getId());
+                return ResponseEntity.ok(movieUpdated);
             }else{
                 User_movies movieUpdated = usermovieservices.updateMovie(updateinfo, id, movieUser.getId());
                 return ResponseEntity.ok(movieUpdated);
