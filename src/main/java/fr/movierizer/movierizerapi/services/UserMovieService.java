@@ -30,46 +30,20 @@ public class UserMovieService {
         log.info("GET THE MOVIE WITH USER INFO");
         User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(iduser, movie.getid());
         Movie movieReturned = movieServices.getOneMovie(movie.getid());
-        return new DtoMovieUser(
-                user_movie.getId(),
-                user_movie.getWatchlist(),
-                user_movie.getGrade(),
-                movieReturned.getid(),
-                movieReturned.getTitle(),
-                movieReturned.getOverview(),
-                movieReturned.getOriginal_title(),
-                movieReturned.getRelease_date(),
-                movieReturned.getPoster_path(),
-                movieReturned.getBackdrop_path(),
-                movieReturned.getBudget(),
-                movieReturned.getRevenue(),
-                movieReturned.getRuntime()
-            );
+        DtoMovieUser dtoMovieUser = new DtoMovieUser();
+        return dtoMovieUser.fromMovieWithUser(movieReturned, user_movie);
     }
 
 
     public DtoMovieUser getOneMovieWithoutUser (Movie movie) {
         log.info("GET THE MOVIE WITHOUT USER INFO");
         Movie movieReturned = movieServices.getOneMovie(movie.getid());
-        return new DtoMovieUser(
-                null,
-                null,
-                null,
-                movieReturned.getid(),
-                movieReturned.getTitle(),
-                movieReturned.getOverview(),
-                movieReturned.getOriginal_title(),
-                movieReturned.getRelease_date(),
-                movieReturned.getPoster_path(),
-                movieReturned.getBackdrop_path(),
-                movieReturned.getBudget(),
-                movieReturned.getRevenue(),
-                movieReturned.getRuntime()
-            );
+        DtoMovieUser dtoMovieUser = new DtoMovieUser();
+        return dtoMovieUser.fromMovieWithoutUser(movieReturned);
     }
 
     public User_movies updateMovie(User_movies updateinfo, Long idMovie, UUID idUser) {
-        log.info("UPDATE MOVIE");
+        log.info("UPDATE OR SAVE MOVIE");
         User_movies movieUpdated = user_movieRepository.findByUserIdAndMovieId(idUser, idMovie);
         if (movieUpdated == null) {
             User_movies newUserMovie = new User_movies();
@@ -77,7 +51,7 @@ public class UserMovieService {
             newUserMovie.setGrade(updateinfo.getGrade());
             newUserMovie.setId(idUser);
             newUserMovie.setWatchlist(updateinfo.getWatchlist());
-            return user_movieRepository.save(newUserMovie);
+            return user_movieRepository.save(newUserMovie);   // TODO add the movie to the database and not just the grade and status 
         }else{
             movieUpdated.setWatchlist(updateinfo.getWatchlist());
             movieUpdated.setGrade(updateinfo.getGrade());
@@ -106,13 +80,5 @@ public class UserMovieService {
         }
     }
 
-    public User_movies saveMovie(User_movies updateinfo, Long id, UUID idUser) {
-        log.info("SAVE MOVIE");
-        User_movies newUserMovie = new User_movies();
-        newUserMovie.setMovie_id(id);
-        newUserMovie.setGrade(updateinfo.getGrade());
-        newUserMovie.setId(idUser);
-        newUserMovie.setWatchlist(updateinfo.getWatchlist());
-        return user_movieRepository.save(newUserMovie);
-    }
+
 }

@@ -85,7 +85,7 @@ public class MovieController {
     @GetMapping("/{id}")
     public ResponseEntity<DtoMovieUser> getOneMovie(@RequestHeader String authorization, @PathVariable Long id) {
         log.info("GET ONE MOVIE MAPPING");
-        if (authorization != null && authorization.startsWith("Bearer ")) {
+        if (authorization != null && authorization.startsWith("Bearer ")) { // TODO see to delete this conditionel
             String token = authorization.substring(7);
             User movieUser = userService.getOneUser(token);
             User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
@@ -118,7 +118,7 @@ public class MovieController {
             User movieUser = userService.getOneUser(token);
             User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
             if(user_movie == null){
-                User_movies movieUpdated = usermovieservices.saveMovie(updateinfo, id, movieUser.getId());
+                User_movies movieUpdated = usermovieservices.updateMovie(updateinfo, id, movieUser.getId());
                 return ResponseEntity.ok(movieUpdated);
             }else{
                 User_movies movieUpdated = usermovieservices.updateMovie(updateinfo, id, movieUser.getId());

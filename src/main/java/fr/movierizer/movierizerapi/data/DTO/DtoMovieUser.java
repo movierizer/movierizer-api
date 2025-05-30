@@ -2,6 +2,9 @@ package fr.movierizer.movierizerapi.data.DTO;
 
 import java.util.UUID;
 
+import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.entities.User_movies;
+
 public class DtoMovieUser {
     
     private UUID iduser;
@@ -157,6 +160,40 @@ public class DtoMovieUser {
         this.runtime = runtime;
     }
 
-    
+    public DtoMovieUser fromMovieWithoutUser(Movie movie) {
+        return new DtoMovieUser(
+            null,
+            null,
+            null,
+            movie.getid(),
+            movie.getTitle(),
+            movie.getOverview(),
+            movie.getOriginal_title(),
+            movie.getRelease_date(),
+            movie.getPoster_path(),
+            movie.getBackdrop_path(),
+            movie.getBudget(),
+            movie.getRevenue(),
+            movie.getRuntime()
+        );
+    }
+
+    public DtoMovieUser fromMovieWithUser(Movie movie, User_movies user_movie) {
+        return new DtoMovieUser(
+            user_movie.getId(),
+            user_movie.getWatchlist(),
+            user_movie.getGrade(),
+            movie.getid(),
+            movie.getTitle(),
+            movie.getOverview(),
+            movie.getOriginal_title(),
+            movie.getRelease_date(),
+            movie.getPoster_path(),
+            movie.getBackdrop_path(),
+            movie.getBudget(),
+            movie.getRevenue(),
+            movie.getRuntime()
+        );
+    }    
     
 }
