@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.DTO.DtoMovieUser;
 import fr.movierizer.movierizerapi.data.entities.User;
 import fr.movierizer.movierizerapi.data.entities.User_movies;
 import fr.movierizer.movierizerapi.services.UserMovieService;
@@ -32,12 +32,12 @@ public class UserMovieController {
     }
 
     @GetMapping("/watchlist")
-    public ResponseEntity<List<User_movies>> getWatchlist(@RequestHeader String authorization) {
+    public ResponseEntity<List<DtoMovieUser>> getWatchlist(@RequestHeader String authorization) {
         log.info("GET WATCHLIST MAPPING");
-         if (authorization != null && authorization.startsWith("Bearer ")) {
+        if (authorization != null && authorization.startsWith("Bearer ")) {
             String token = authorization.substring(7);
             User movieUser = userService.getOneUser(token);
-            List<User_movies> watchlist = usermovieservices.getWatchlist(movieUser.getId());
+            List<DtoMovieUser> watchlist = usermovieservices.getWatchlist(movieUser.getId()); // TODO see to correctly handle if getwatchlist return empty
             return ResponseEntity.ok(watchlist);
         }else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); //TODO return somathing more usefull to interpret 
@@ -45,12 +45,12 @@ public class UserMovieController {
     }
 
     @GetMapping("/collection")
-    public ResponseEntity<List<User_movies>> getCollection(@RequestHeader String authorization) {
-        log.info("GET WATCHLIST MAPPING");
+    public ResponseEntity<List<DtoMovieUser>> getCollection(@RequestHeader String authorization) {
+        log.info("GET COLLECTION MAPPING");
          if (authorization != null && authorization.startsWith("Bearer ")) {
             String token = authorization.substring(7);
             User movieUser = userService.getOneUser(token);
-            List<User_movies> watchlist = usermovieservices.getCollection(movieUser.getId());
+            List<DtoMovieUser> watchlist = usermovieservices.getCollection(movieUser.getId()); // TODO see to correctly handle if getCollection return empty
             return ResponseEntity.ok(watchlist);
         }else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); //TODO return somathing more usefull to interpret 
