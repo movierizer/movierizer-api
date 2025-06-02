@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.movierizer</groupId>
 	<artifactId>movierizerapi</artifactId>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<name>movierizerapi</name>
 	<description>creation of a little api for my project</description>
 	<url/>
