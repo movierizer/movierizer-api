@@ -15,6 +15,6 @@ This application is very simple to use, type :
 ./mvnw clean spring-boot:run
 ```
 
-and you can find the application on this adress : [http://localhost:8080/movies](http://localhost:8080/movies)
+and you can find the application on this adress : [http://localhost:8080/movies](http://localhost:8080/movies) 
 
 
