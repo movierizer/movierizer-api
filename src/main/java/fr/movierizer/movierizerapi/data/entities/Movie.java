@@ -1,9 +1,15 @@
 package fr.movierizer.movierizerapi.data.entities;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.movierizer.movierizerapi.data.DTO.CreditsDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /*This class is my movies entity who represent a movie in my database*/
 @Entity
@@ -35,6 +41,8 @@ public class Movie {
 	private String country;
 	@Column(name = "url_trailer")
 	private String url_trailer;
+	@Transient
+	private List<People_movie> credits = new ArrayList<>(); 
 
 
 	/*Default constructor*/
@@ -124,6 +132,15 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
+	public void setCredits(List<People_movie> credits) {
+        this.credits = credits;
+    }
+
+    public List<People_movie> getCredits() {
+        return credits;
+    }
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -201,6 +218,9 @@ public class Movie {
 				+ ", backdropPath=" + backdrop_path + ", budget=" + budget + ", revenue=" + revenue + ", runtime="
 				+ runtime + "]";
 	}
+
+
+
 
 
 }
