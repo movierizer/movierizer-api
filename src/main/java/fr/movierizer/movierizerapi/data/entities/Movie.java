@@ -1,9 +1,19 @@
 package fr.movierizer.movierizerapi.data.entities;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /*This class is my movies entity who represent a movie in my database*/
 @Entity
@@ -35,10 +45,29 @@ public class Movie {
 	private String country;
 	@Column(name = "url_trailer")
 	private String url_trailer;
+	@Transient
+	@JsonManagedReference
+	private List<People_movie> credits = new ArrayList<>(); 
 
 
-	/*Default constructor*/
+
+
 	public Movie() {}
+
+	public Movie(Long id, String title, String overview, String original_title, String release_date, String poster_path,
+			String backdrop_path, Long budget, Long revenue, Long runtime, String country, String url_trailer) {
+		this.id = id;
+		this.title = title;
+		this.overview = overview;
+		this.original_title = original_title;
+		this.release_date = release_date;
+		this.poster_path = poster_path;
+		this.backdrop_path = backdrop_path;
+		this.budget = budget;
+		this.revenue = revenue;
+		this.runtime = runtime;
+	}
+
 
 	public Movie(String title, Integer grade) {
 		this.title = title;
@@ -124,6 +153,16 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
+	public void setCredits(List<People_movie> credits) {
+        this.credits = credits;
+    }
+
+    public List<People_movie> getCredits() {
+        return credits;
+    }
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -201,6 +240,9 @@ public class Movie {
 				+ ", backdropPath=" + backdrop_path + ", budget=" + budget + ", revenue=" + revenue + ", runtime="
 				+ runtime + "]";
 	}
+
+
+
 
 
 }

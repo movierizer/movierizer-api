@@ -1,9 +1,12 @@
 package fr.movierizer.movierizerapi.data.DTO;
 
+import java.util.List;
 import java.util.UUID;
 
 import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.entities.People_movie;
 import fr.movierizer.movierizerapi.data.entities.User_movies;
+
 
 public class DtoMovieUser {
     
@@ -20,12 +23,13 @@ public class DtoMovieUser {
 	private Long budget; 
 	private Long revenue; 
 	private Long runtime;
+    private List<People_movie> credits;
 
     public DtoMovieUser() {}
 
     public DtoMovieUser(UUID iduser, String watchlist, Integer grade, Long idmovie, String title, String overview,
             String original_title, String release_date, String poster_path, String backdrop_path, Long budget,
-            Long revenue, Long runtime) {
+            Long revenue, Long runtime, List<People_movie> credits) {
         this.iduser = iduser;
         this.watchlist = watchlist;
         this.grade = grade;
@@ -39,11 +43,12 @@ public class DtoMovieUser {
         this.budget = budget;
         this.revenue = revenue;
         this.runtime = runtime;
+        this.credits = credits;
     }
 
     public DtoMovieUser(Long idmovie, String title, String overview,
         String original_title, String release_date, String poster_path, String backdrop_path, Long budget,
-        Long revenue, Long runtime) {
+        Long revenue, Long runtime, List<People_movie> credits) {
         this.idmovie = idmovie;
         this.title = title;
         this.overview = overview;
@@ -54,6 +59,7 @@ public class DtoMovieUser {
         this.budget = budget;
         this.revenue = revenue;
         this.runtime = runtime;
+        this.credits = credits;
     }
 
     public UUID getIduser() {
@@ -160,6 +166,16 @@ public class DtoMovieUser {
         this.runtime = runtime;
     }
 
+    public List<People_movie> getCredits() {
+        return credits;
+    }
+
+    public void setCredits(List<People_movie> credits) {
+        this.credits = credits;
+    }
+
+
+
     public DtoMovieUser fromMovieWithoutUser(Movie movie) {
         return new DtoMovieUser(
             null,
@@ -174,7 +190,8 @@ public class DtoMovieUser {
             movie.getBackdrop_path(),
             movie.getBudget(),
             movie.getRevenue(),
-            movie.getRuntime()
+            movie.getRuntime(),
+            movie.getCredits()
         );
     }
 
@@ -192,7 +209,9 @@ public class DtoMovieUser {
             movie.getBackdrop_path(),
             movie.getBudget(),
             movie.getRevenue(),
-            movie.getRuntime()
+            movie.getRuntime(),
+            movie.getCredits()
+
         );
     }    
     

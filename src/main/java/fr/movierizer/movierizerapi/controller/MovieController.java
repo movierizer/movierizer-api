@@ -110,13 +110,13 @@ public class MovieController {
      * @return the updated movie with the id attribute set.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<User_movies> updateMovie(@RequestHeader String authorization, @RequestBody User_movies updateinfo, @PathVariable Long id) {
+    public ResponseEntity<User_movies> updateMovie(@RequestHeader String authorization, @RequestBody DtoMovieUser updateinfo, @PathVariable Long id) {
         log.info("UPDATE MOVIE MAPPING");
          if (authorization != null && authorization.startsWith("Bearer ")) {
             String token = authorization.substring(7);
             User movieUser = userService.getOneUser(token);
             User_movies user_movie = user_movieRepository.findByUserIdAndMovieId(movieUser.getId(), id); //find if a user have already this movie
-            if(user_movie == null){
+            if(user_movie == null){  // TODO this condition is useless
                 User_movies movieUpdated = usermovieservices.updateMovie(updateinfo, id, movieUser.getId());
                 return ResponseEntity.ok(movieUpdated);
             }else{

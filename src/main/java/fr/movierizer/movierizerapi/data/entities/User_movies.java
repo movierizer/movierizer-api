@@ -19,6 +19,7 @@ public class User_movies {
 	private UUID userId;
 
     @Column(name = "movie_id")
+    
     private Long movieId;
 
     @Column(name = "watchlist")
