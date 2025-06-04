@@ -21,17 +21,25 @@ public class People {
     @Column(name = "gender")
     private Integer gender;
 
-    @Column(name = "known_for_departement")
-    private String known_for_departement;
+    @Column(name = "known_for_department")
+    private String known_for_department;
 
     public People() {}
 
-    public People(Long id, String name, String profile_path, Integer gender, String known_for_departement) {
+    public People(Long id, String name, String profile_path, Integer gender, String known_for_department) {
         this.id = id;
         this.name = name;
         this.profile_path = profile_path;
         this.gender = gender;
-        this.known_for_departement = known_for_departement;
+        this.known_for_department = known_for_department;
+    }
+
+    public People(People people) {
+        this.id = people.getId();
+        this.name = people.getName();
+        this.profile_path = people.getProfile_path();
+        this.gender = people.getGender();
+        this.known_for_department = people.getKnown_for_department();
     }
 
     public Long getId() {
@@ -66,12 +74,12 @@ public class People {
         this.gender = gender;
     }
 
-    public String getKnown_for_departement() {
-        return known_for_departement;
+    public String getKnown_for_department() {
+        return known_for_department;
     }
 
-    public void setKnown_for_departement(String known_for_departement) {
-        this.known_for_departement = known_for_departement;
+    public void setKnown_for_department(String known_for_department) {
+        this.known_for_department = known_for_department;
     }
 
     

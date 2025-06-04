@@ -7,17 +7,19 @@ public class CastDTO {
     private String profile_path;
     private Integer gender;
     private String character;
+    private String known_for_department;
     
     public CastDTO() {
     }
 
     
-    public CastDTO(Long id, String name, String profile_path, Integer gender, String character) {
+    public CastDTO(Long id, String name, String profile_path, Integer gender, String character, String known_for_department) {
         this.id = id;
         this.name = name;
         this.profile_path = profile_path;
         this.gender = gender;
         this.character = character;
+        this.known_for_department = known_for_department;
     }
 
     public Long getId() {
@@ -49,6 +51,14 @@ public class CastDTO {
     }
     public void setCharacter(String character) {
         this.character = character;
+    }
+
+    public String getKnown_for_department() {
+        return known_for_department;
+    }
+
+    public void setKnown_for_department(String known_for_department) {
+        this.known_for_department = known_for_department;
     }
 
     

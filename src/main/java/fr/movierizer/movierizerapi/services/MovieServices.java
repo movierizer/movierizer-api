@@ -70,10 +70,7 @@ public class MovieServices {
      */
 
     public Movie newMovie(Movie newMovie) {
-        log.info("adding movie: " + newMovie);
         String result = apiService.getOneMovie(newMovie).block(); 
-        log.info("REPONSE DE L'API : " + result);
-        log.info("NEW MOVIE : " + newMovie);
         return movierepository.save(newMovie);
     }
 

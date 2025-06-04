@@ -1,5 +1,8 @@
 package fr.movierizer.movierizerapi.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ public class People_movie {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
+    @JsonIgnore
     private Movie movie; 
 
     @ManyToOne 
@@ -80,4 +84,6 @@ public class People_movie {
     public void setJob(String job) {
         this.job = job;
     }
+
+    
 }

@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 
 import fr.movierizer.movierizerapi.data.DTO.DtoMovieUser;
 import fr.movierizer.movierizerapi.data.entities.Movie;
+import fr.movierizer.movierizerapi.data.entities.People;
+import fr.movierizer.movierizerapi.data.entities.People_movie;
 import fr.movierizer.movierizerapi.data.entities.User_movies;
 import fr.movierizer.movierizerapi.data.repository.MovieRepository;
+import fr.movierizer.movierizerapi.data.repository.PeopleRepository;
+import fr.movierizer.movierizerapi.data.repository.People_movieRepository;
 import fr.movierizer.movierizerapi.data.repository.User_movieRepository;
 
 @Service 
@@ -22,13 +26,17 @@ public class UserMovieService {
     private final MovieServices movieServices;
     private final ApiService apiService;
     private final MovieRepository movierepository;
+    private final PeopleRepository peopleRepository;
+    private final People_movieRepository people_movieRepository;
 
 
-    public UserMovieService(User_movieRepository user_movieRepository, MovieServices movieServices, ApiService apiService, MovieRepository movierepository) {
+    public UserMovieService(User_movieRepository user_movieRepository, MovieServices movieServices, ApiService apiService, MovieRepository movierepository, PeopleRepository peopleRepository, People_movieRepository people_movieRepository) {
         this.user_movieRepository = user_movieRepository;
         this.movieServices = movieServices;
         this.apiService = apiService;
         this.movierepository = movierepository;
+        this.peopleRepository = peopleRepository;
+        this.people_movieRepository = people_movieRepository;
     }
 
     public DtoMovieUser getOneMovieWithUser (Movie movie, UUID iduser) {
@@ -47,7 +55,7 @@ public class UserMovieService {
         return dtoMovieUser.fromMovieWithoutUser(movieReturned);
     }
 
-    public User_movies updateMovie(User_movies updateinfo, Long idMovie, UUID idUser) {
+    public User_movies updateMovie(DtoMovieUser updateinfo, Long idMovie, UUID idUser) {
         log.info("UPDATE OR SAVE MOVIE");
         User_movies movieUpdated = user_movieRepository.findByUserIdAndMovieId(idUser, idMovie);
         if (movieUpdated == null) {
@@ -56,9 +64,17 @@ public class UserMovieService {
             newUserMovie.setGrade(updateinfo.getGrade());
             newUserMovie.setId(idUser);
             newUserMovie.setWatchlist(updateinfo.getWatchlist());
-            Movie newMovie = apiService.getOneMovie(idMovie).block(); // call the TMDB API to get the movie into our database
-            if (newMovie != null) {
-                movierepository.save(newMovie);
+            Movie newMovie = new Movie(idMovie, updateinfo.getTitle(), updateinfo.getOverview(), updateinfo.getOriginal_title(), updateinfo.getRelease_date(), updateinfo.getPoster_path(), updateinfo.getBackdrop_path(), updateinfo.getBudget(), updateinfo.getRevenue(), updateinfo.getRuntime(), null, null);
+            movierepository.save(newMovie);
+            for (int i = 0; i < updateinfo.getCredits().size(); i++) { 
+                People newPeople = new People(updateinfo.getCredits().get(i).getPeople());
+                People_movie newPeople_movie = new People_movie();
+                newPeople_movie.setMovie(newMovie);
+                newPeople_movie.setPeople(newPeople);
+                newPeople_movie.setCharacter(updateinfo.getCredits().get(i).getCharacter());
+                newPeople_movie.setJob(updateinfo.getCredits().get(i).getJob());
+                peopleRepository.save(newPeople);
+                people_movieRepository.save(newPeople_movie);
             }
             return user_movieRepository.save(newUserMovie);  
         }else{

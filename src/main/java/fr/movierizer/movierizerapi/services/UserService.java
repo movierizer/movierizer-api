@@ -23,7 +23,6 @@ public class UserService {
     public User getOneUser(String token) {
         log.info("GET ONE USER");
         String username = jwtService.extractUsername(token);
-        log.info("USERNAME: " + username);
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 

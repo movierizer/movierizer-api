@@ -1,5 +1,9 @@
 package fr.movierizer.movierizerapi.data.DTO;
 
+import java.util.List;
+
+import fr.movierizer.movierizerapi.data.entities.People;
+import fr.movierizer.movierizerapi.data.entities.People_movie;
 
 public class MovieDTO {
     

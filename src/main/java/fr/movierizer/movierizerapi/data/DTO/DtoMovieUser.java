@@ -174,6 +174,8 @@ public class DtoMovieUser {
         this.credits = credits;
     }
 
+
+
     public DtoMovieUser fromMovieWithoutUser(Movie movie) {
         return new DtoMovieUser(
             null,
@@ -209,6 +211,7 @@ public class DtoMovieUser {
             movie.getRevenue(),
             movie.getRuntime(),
             movie.getCredits()
+
         );
     }    
     

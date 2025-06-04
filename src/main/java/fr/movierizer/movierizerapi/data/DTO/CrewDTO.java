@@ -7,16 +7,18 @@ public class CrewDTO {
     private String profile_path;
     private Integer gender;
     private String job;
+    private String known_for_department;
 
     public CrewDTO() {
     }
 
-    public CrewDTO(Long id, String name, String profile_path, Integer gender, String job) {
+    public CrewDTO(Long id, String name, String profile_path, Integer gender, String job, String known_for_department) {
         this.id = id;
         this.name = name;
         this.profile_path = profile_path;
         this.gender = gender;
         this.job = job;
+        this.known_for_department = known_for_department;
     }
 
     public Long getId() {
@@ -48,6 +50,14 @@ public class CrewDTO {
     }
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public String getKnown_for_department() {
+        return known_for_department;
+    }
+
+    public void setKnown_for_department(String known_for_department) {
+        this.known_for_department = known_for_department;
     }
 
     
